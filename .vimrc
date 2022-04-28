@@ -50,7 +50,6 @@ Plug 'vim-airline/vim-airline'
 
 call plug#end()
 
-
 colorscheme gruvbox
 
 " FZf position
@@ -74,6 +73,9 @@ function! s:show_documentation()
     call feedkeys('K', 'in')
   endif
 endfunction
+
+" Coc Autocompletion
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"                              
 
 " Coc tab actions
 " Use tab for trigger completion with characters ahead and navigate.
