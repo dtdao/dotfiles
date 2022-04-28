@@ -58,6 +58,12 @@ let g:fzf_layout = { 'down': '~40%' }
 nnoremap <Leader>gb :Git blame<CR>
 nnoremap <Leader><C-f>  :Files<CR>
 
+" Window navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
 " Telescope hot keys
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>

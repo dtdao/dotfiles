@@ -58,6 +58,12 @@ let g:fzf_layout = { 'down': '~40%' }
 nnoremap <Leader>gb :Git blame<CR>
 nnoremap <Leader><C-f>  :Files<CR>
 
+" Window navigation
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
 " GoTo code navigation. coc-vim
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
