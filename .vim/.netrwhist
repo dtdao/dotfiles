@@ -1,5 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =6
+let g:netrw_dirhistcnt =9
+let g:netrw_dirhist_9='/Users/dong/Desktop/Systemi/BenkyouKai/gaming-react/src'
+let g:netrw_dirhist_8='/Users/dong/Desktop/Systemi/BenkyouKai/gaming-react'
+let g:netrw_dirhist_7='/Users/dong'
 let g:netrw_dirhist_6='/Users/dong/Desktop/Systemi/BenkyouKai/gaming-react'
 let g:netrw_dirhist_5='/Users/dong/Desktop/Systemi/BenkyouKai/gaming-react/src'
 let g:netrw_dirhist_4='/Users/dong/Desktop/Systemi/BenkyouKai/gaming-react'
@@ -7,6 +10,3 @@ let g:netrw_dirhist_3='/Users/dong/Desktop/Random/web3/learning/speedrunethereum
 let g:netrw_dirhist_2='/Users/dong/Desktop/Random/web3/learning/speedrunethereum/challenge-1-decentralized-staking/packages/hardhat-ts'
 let g:netrw_dirhist_1='/Users/dong/Desktop/Random/web3/learning/speedrunethereum/challenge-1-decentralized-staking/packages'
 let g:netrw_dirhist_0='/Users/dong/Desktop/Random/web3/learning/speedrunethereum/challenge-1-decentralized-staking/packages/vite-app-ts'
-let g:netrw_dirhist_9='/Users/dong/Desktop/Random/web3/learning/speedrunethereum/challenge-1-decentralized-staking/packages/vite-app-ts/src'
-let g:netrw_dirhist_8='/Users/dong/Desktop/Random/web3/learning/speedrunethereum/challenge-1-decentralized-staking/packages/vite-app-ts/src/models'
-let g:netrw_dirhist_7='/Users/dong/Desktop/Random/web3/learning/speedrunethereum/challenge-1-decentralized-staking/packages/vite-app-ts/src'

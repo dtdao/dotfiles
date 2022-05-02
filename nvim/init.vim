@@ -86,6 +86,10 @@ function! s:show_documentation()
   endif
 endfunction
 
+" Coc autoimport
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+
 " Coc tab actions
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
