@@ -16,6 +16,7 @@ set number
 set nohlsearch
 set scrolloff=8
 set cmdheight=2
+set tabstop=4
 
 " leader key
 let mapleader = " "
@@ -75,6 +76,13 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+" Use c-space to trigger completion
+if has("nvim")
+    inoremap <silent><expr> <c-space> coc#refresh()
+else
+    inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
