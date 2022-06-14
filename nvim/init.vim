@@ -42,6 +42,7 @@ Plug 'tpope/vim-surround'
 " Javascript and TypeScript syntax highlight
 Plug 'leafgarland/typescript-vim'
 Plug 'pangloss/vim-javascript'
+Plug 'maxmellon/vim-jsx-pretty'
 
 " Autocompletion
 Plug 'neoclide/coc.nvim', { 'branch': 'release' } 
