@@ -36,6 +36,9 @@ Plug 'nvim-telescope/telescope.nvim'
 "  autopairs
 Plug 'jiangmiao/auto-pairs'
 
+" comment plugin
+Plug 'tpope/vim-commentary'
+
 " Parenthesising
 Plug 'tpope/vim-surround'
 
