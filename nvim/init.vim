@@ -1,4 +1,4 @@
-set nocompatible
+ set nocompatible
 syntax on
 filetype off
 
@@ -24,28 +24,29 @@ let mapleader = " "
 call plug#begin()
 
 " Styling
-Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 
 " Git
 Plug 'tpope/vim-fugitive'
 
-" Telescope fuzzy finder 
+" " Telescope fuzzy finder 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
 "  autopairs
 Plug 'jiangmiao/auto-pairs'
 
-" comment plugin
+" " comment plugin
 Plug 'tpope/vim-commentary'
 
 " Parenthesising
 Plug 'tpope/vim-surround'
 
 " Javascript and TypeScript syntax highlight
-Plug 'leafgarland/typescript-vim'
-Plug 'pangloss/vim-javascript'
-Plug 'maxmellon/vim-jsx-pretty'
+" These are probably not needed because gruv can handle the syntax hightlight
+" Plug 'leafgarland/typescript-vim'
+" Plug 'pangloss/vim-javascript'
+" Plug 'maxmellon/vim-jsx-pretty'
 
 " Autocompletion
 Plug 'neoclide/coc.nvim', { 'branch': 'release' } 
@@ -54,8 +55,6 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'vim-airline/vim-airline'
 
 call plug#end()
-
-colorscheme gruvbox
 
 " FZf position
 let g:fzf_layout = { 'down': '~40%' }
@@ -70,7 +69,7 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " Telescope hot keys
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({hidden = true})<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
@@ -108,3 +107,8 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>  pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+set background=dark
+syntax enable
+set termguicolors
+colorscheme gruvbox
