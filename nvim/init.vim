@@ -25,6 +25,7 @@ call plug#begin()
 
 " Styling
 Plug 'gruvbox-community/gruvbox'
+Plug 'luisiacc/gruvbox-baby', {'branch': 'main'}
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -45,8 +46,8 @@ Plug 'tpope/vim-surround'
 " Javascript and TypeScript syntax highlight
 " These are probably not needed because gruv can handle the syntax hightlight
 " Plug 'leafgarland/typescript-vim'
-" Plug 'pangloss/vim-javascript'
-" Plug 'maxmellon/vim-jsx-pretty'
+Plug 'pangloss/vim-javascript'
+Plug 'maxmellon/vim-jsx-pretty'
 
 " Autocompletion
 Plug 'neoclide/coc.nvim', { 'branch': 'release' } 
@@ -67,6 +68,10 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+" Vim panel resize
+nnoremap <Leader>+ :vertical resize +5<CR>
+nnoremap <Leader>- :vertical resize -5<CR>
 
 " Telescope hot keys
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({hidden = true})<cr>
@@ -100,7 +105,6 @@ endfunction
 " Coc autoimport
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-
 " Coc tab actions
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -110,5 +114,15 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 set background=dark
 syntax enable
-set termguicolors
+
+" gruvbox stuff
+let g:gruvbox_contrast_dark='medium'
+let g:gruvbox_termcolors=16
+let g:gruvbox_transparent_bg=1
+
+" Workaround for creating transparent bg
+autocmd SourcePost * highlight Normal     ctermbg=NONE guibg=NONE
+            \ |    highlight LineNr     ctermbg=NONE guibg=NONE
+            \ |    highlight SignColumn ctermbg=NONE guibg=NONE
+
 colorscheme gruvbox
