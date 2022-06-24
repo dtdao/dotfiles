@@ -78,6 +78,7 @@ nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({hidden = t
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+nnoremap <leader>fr <cmd>lua require('telescope.builtin').resume()<cr>
 
 " GoTo code navigation. coc-vim
 nmap <silent> gd <Plug>(coc-definition)
