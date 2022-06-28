@@ -33,6 +33,7 @@ Plug 'tpope/vim-fugitive'
 " " Telescope fuzzy finder 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'fannheyward/telescope-coc.nvim'
 
 "  autopairs
 Plug 'jiangmiao/auto-pairs'
@@ -80,11 +81,14 @@ nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>fr <cmd>lua require('telescope.builtin').resume()<cr>
 
+" coc telesocpe 
+lua require('telescope').load_extension('coc')
+
 " GoTo code navigation. coc-vim
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gd <cmd> :Telescope coc definitions<cr>
+nmap <silent> gr <cmd> :Telescope coc references<cr>
+nmap <silent> gy <cmd> :Telescope coc implementations<cr>
+nmap <silent> gi <cmd> :Telescope coc type_definitions<cr>
 
 " Use c-space to trigger completion
 if has("nvim")
