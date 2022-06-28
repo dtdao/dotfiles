@@ -122,7 +122,6 @@ syntax enable
 
 " gruvbox stuff
 let g:gruvbox_contrast_dark='medium'
-let g:gruvbox_termcolors=16
 let g:gruvbox_transparent_bg=1
 
 " Workaround for creating transparent bg
