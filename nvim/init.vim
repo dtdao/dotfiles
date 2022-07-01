@@ -1,4 +1,4 @@
- set nocompatible
+set nocompatible
 syntax on
 filetype off
 
@@ -30,9 +30,13 @@ Plug 'luisiacc/gruvbox-baby', {'branch': 'main'}
 " Git
 Plug 'tpope/vim-fugitive'
 
+" Nerdtree
+Plug 'scrooloose/nerdtree'
+
 " " Telescope fuzzy finder 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'fannheyward/telescope-coc.nvim'
 
 "  autopairs
@@ -56,13 +60,21 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 " Status menu
 Plug 'vim-airline/vim-airline'
 
+" Prettier
+Plug 'sbdchd/neoformat'
 call plug#end()
 
 " FZf position
 let g:fzf_layout = { 'down': '~40%' }
 
 nnoremap <Leader>gb :Git blame<CR>
-nnoremap <Leader><C-f>  :Files<CR>
+
+" nerd tree keymaps
+nnoremap <leader>n :NERDTreeFocus<cr>
+nnoremap <C-n> :NERDTree<cr>
+nnoremap <C-t> :NERDTreeToggle<cr>
+nnoremap <C-f> :NERDTreeFind<cr>
+let NERDTreeShowHidden=1
 
 " Window navigation
 nnoremap <C-J> <C-W><C-J>
@@ -83,6 +95,7 @@ nnoremap <leader>fr <cmd>lua require('telescope.builtin').resume()<cr>
 
 " coc telesocpe 
 lua require('telescope').load_extension('coc')
+lua require('telescope').load_extension('fzy_native')
 
 " GoTo code navigation. coc-vim
 nmap <silent> gd <cmd> :Telescope coc definitions<cr>
@@ -118,6 +131,7 @@ inoremap <silent><expr> <TAB>  pumvisible() ? "\<C-n>" : <SID>check_back_space()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 set background=dark
+colorscheme gruvbox
 syntax enable
 
 " gruvbox stuff
@@ -129,4 +143,8 @@ autocmd SourcePost * highlight Normal     ctermbg=NONE guibg=NONE
             \ |    highlight LineNr     ctermbg=NONE guibg=NONE
             \ |    highlight SignColumn ctermbg=NONE guibg=NONE
 
-colorscheme gruvbox
+" neoformat auto format
+augroup fmt
+    autocmd!
+    au BufWritePre * try | undojoin | Neoformat | catch /E790/ | Neoformat | endtry
+augroup End
