@@ -42,7 +42,10 @@ Plug 'fannheyward/telescope-coc.nvim'
 "  autopairs
 Plug 'jiangmiao/auto-pairs'
 
-" " comment plugin
+" Golang
+Plug 'fatih/vim-go'
+
+" comment plugin
 Plug 'tpope/vim-commentary'
 
 " Parenthesising
