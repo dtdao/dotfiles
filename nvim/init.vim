@@ -60,6 +60,10 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 " Status menu
 Plug 'vim-airline/vim-airline'
 
+" code snippets
+" Plug 'L3MON4D3/LuaSnip'
+" Plug 'rafamadriz/friendly-snippets'
+
 " Prettier
 Plug 'sbdchd/neoformat'
 call plug#end()
@@ -146,5 +150,7 @@ autocmd SourcePost * highlight Normal     ctermbg=NONE guibg=NONE
 " neoformat auto format
 augroup fmt
     autocmd!
-    au BufWritePre * try | undojoin | Neoformat | catch /E790/ | Neoformat | endtry
+    autocmd BufWritePre * try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
 augroup End
+
+
