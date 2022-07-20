@@ -7,5 +7,12 @@
   "hover.floatConfig": {
     "border": true,
     "shadow": true
+  },
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"]
+    }
   }
 }
