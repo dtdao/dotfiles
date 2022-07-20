@@ -54,8 +54,8 @@ Plug 'tpope/vim-surround'
 " Javascript and TypeScript syntax highlight
 " These are probably not needed because gruv can handle the syntax hightlight
 " Plug 'leafgarland/typescript-vim'
-Plug 'pangloss/vim-javascript'
-Plug 'maxmellon/vim-jsx-pretty'
+" Plug 'pangloss/vim-javascript'
+" Plug 'maxmellon/vim-jsx-pretty'
 
 " Autocompletion
 Plug 'neoclide/coc.nvim', { 'branch': 'release' } 
@@ -63,13 +63,15 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 " Status menu
 Plug 'vim-airline/vim-airline'
 
-" code snippets
-" Plug 'L3MON4D3/LuaSnip'
-" Plug 'rafamadriz/friendly-snippets'
+" Tree sitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Prettier
 Plug 'sbdchd/neoformat'
 call plug#end()
+
+" lua shit
+lua require("init")
 
 " FZf position
 let g:fzf_layout = { 'down': '~40%' }
