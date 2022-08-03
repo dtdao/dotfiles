@@ -51,7 +51,7 @@ Plug 'scrooloose/nerdtree'
 " Telescope fuzzy finder 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 "  autopairs
 Plug 'jiangmiao/auto-pairs'
@@ -61,12 +61,6 @@ Plug 'tpope/vim-commentary'
 
 " Parenthesising
 Plug 'tpope/vim-surround'
-
-" Javascript and TypeScript syntax highlight
-" These are probably not needed because gruv can handle the syntax hightlight
-" Plug 'leafgarland/typescript-vim'
-" Plug 'pangloss/vim-javascript'
-" Plug 'maxmellon/vim-jsx-pretty'
 
 " Status menu
 Plug 'vim-airline/vim-airline'
@@ -81,6 +75,8 @@ call plug#end()
 
 " lua shit
 lua require("init")
+
+lua require('telescope').load_extension('fzf')
 
 " FZf position
 let g:fzf_layout = { 'down': '~40%' }
