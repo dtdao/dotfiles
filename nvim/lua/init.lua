@@ -5,6 +5,22 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local telescope_builtin = require('telescope.builtin')
 
+vim.diagnostic.config({
+    float = {
+        max_width = 120
+    },
+    virtual_text = {
+        spacing = 20,
+        prefix = '▎'  -- '●' -- Could be '■', '▎', 'x'
+    }
+})
+
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
 local on_attach = function()
         vim.keymap.set("n", "K", vim.lsp.buf.hover, {buffer=0})
         vim.keymap.set("n", "gd", telescope_builtin.lsp_definitions, {buffer=0})
@@ -18,6 +34,8 @@ local on_attach = function()
         vim.keymap.set("n", "<Leader>r", vim.lsp.buf.rename, {buffer=0})
 
         vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, {buffer=0})
+
+        vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float, {buffer=0})
 end
 
 -- Native LSP
