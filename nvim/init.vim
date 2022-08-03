@@ -36,6 +36,12 @@ Plug 'hrsh7th/cmp-path'
 Plug 'saadparwaiz1/cmp_luasnip' 
 Plug 'L3MON4D3/LuaSnip' 
 
+" Schemastore
+Plug 'b0o/schemastore.nvim'
+
+" Signature
+Plug 'ray-x/lsp_signature.nvim'
+
 " Git
 Plug 'tpope/vim-fugitive'
 
@@ -83,8 +89,8 @@ nnoremap <Leader>gb :Git blame<CR>
 
 " nerd tree keymaps
 nnoremap <leader>n :NERDTreeFocus<cr>
-nnoremap <C-n> :NERDTree<cr>
-" nnoremap <C-T> :NERDTreeToggle<cr>
+" nnoremap <C-n> :NERDTree<cr>
+nnoremap <C-n> :NERDTreeToggle<cr>
 nnoremap <C-f> :NERDTreeFind<cr>
 let NERDTreeShowHidden=1
 
@@ -121,6 +127,7 @@ autocmd SourcePost * highlight Normal     ctermbg=NONE guibg=NONE
 " neoformat auto format
 augroup fmt
     autocmd!
+    autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll
     autocmd BufWritePre * try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
 augroup End
 
