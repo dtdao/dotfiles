@@ -15,11 +15,11 @@ vim.diagnostic.config({
     }
 })
 
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
+-- local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+-- for type, icon in pairs(signs) do
+--   local hl = "DiagnosticSign" .. type
+--   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+-- end
 
 local on_attach = function()
         vim.keymap.set("n", "K", vim.lsp.buf.hover, {buffer=0})
@@ -92,15 +92,18 @@ require('lspconfig')["sumneko_lua"].setup {
 
 -- lsp lsp_signature
 require("lsp_signature").setup{}
+require("luasnip.loaders.from_vscode").lazy_load()
+require("luasnip.loaders.from_lua").lazy_load()
 
 vim.opt.completeopt={"menu", "menuone", "noselect"}
   -- Setup nvim-cmp.
   local cmp = require'cmp'
+  local luasnip = require("luasnip")
 
   cmp.setup({
     snippet = {
       expand = function(args)
-        require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        luasnip.lsp_expand(args.body) -- For `luasnip` users.
      end,
     },
     window = {

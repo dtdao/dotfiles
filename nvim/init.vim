@@ -35,6 +35,7 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path' 
 Plug 'saadparwaiz1/cmp_luasnip' 
 Plug 'L3MON4D3/LuaSnip' 
+Plug 'rafamadriz/friendly-snippets'
 
 " Schemastore
 Plug 'b0o/schemastore.nvim'
@@ -58,6 +59,11 @@ Plug 'jiangmiao/auto-pairs'
 
 " comment plugin
 Plug 'tpope/vim-commentary'
+Plug 'JoosepAlviste/nvim-ts-context-commentstring'
+Plug 'heavenshell/vim-jsdoc', {
+  \ 'for': ['javascript', 'javascript.jsx','typescript'],
+  \ 'do': 'make install'
+\}
 
 " Parenthesising
 Plug 'tpope/vim-surround'
