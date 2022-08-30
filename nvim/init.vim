@@ -77,6 +77,9 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " Prettier
 Plug 'sbdchd/neoformat'
 
+" Test
+Plug 'vim-test/vim-test'
+
 call plug#end()
 
 " lua shit
