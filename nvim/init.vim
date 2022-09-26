@@ -73,6 +73,7 @@ Plug 'vim-airline/vim-airline'
 
 " Tree sitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-context' 
 
 " Prettier
 Plug 'sbdchd/neoformat'
