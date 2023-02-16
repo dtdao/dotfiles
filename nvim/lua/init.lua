@@ -67,7 +67,7 @@ require('lspconfig')['jsonls'].setup {
 }
 
 -- lua
-require('lspconfig')["sumneko_lua"].setup {
+require('lspconfig')["lua_ls"].setup {
   settings = {
     Lua = {
       runtime = {
@@ -151,3 +151,12 @@ vim.opt.completeopt={"menu", "menuone", "noselect"}
       { name = 'buffer' },
     })
   })
+
+vim.opt.list = true
+vim.opt.listchars:append "eol:↴"
+
+require("indent_blankline").setup {
+    show_current_context = true,
+    show_current_context_start = true,
+}
+

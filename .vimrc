@@ -45,6 +45,9 @@ Plug 'pangloss/vim-javascript'
 " Autocompletion
 Plug 'neoclide/coc.nvim', { 'branch': 'release' } 
 
+" Plank line
+Plug 'lukas-reineke/indent-blankline.nvim'
+
 " Status menu
 Plug 'vim-airline/vim-airline'
 

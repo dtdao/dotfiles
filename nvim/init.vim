@@ -68,6 +68,8 @@ Plug 'heavenshell/vim-jsdoc', {
 " Parenthesising
 Plug 'tpope/vim-surround'
 
+Plug 'lukas-reineke/indent-blankline.nvim'
+
 " Status menu
 Plug 'vim-airline/vim-airline'
 
