@@ -47,7 +47,9 @@ Plug 'ray-x/lsp_signature.nvim'
 Plug 'tpope/vim-fugitive'
 
 " Nerdtree
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
+Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
+Plug 'nvim-tree/nvim-tree.lua'
 
 " Telescope fuzzy finder 
 Plug 'nvim-lua/plenary.nvim'
@@ -96,11 +98,10 @@ let g:fzf_layout = { 'down': '~40%' }
 nnoremap <Leader>gb :Git blame<CR>
 
 " nerd tree keymaps
-nnoremap <leader>n :NERDTreeFocus<cr>
-" nnoremap <C-n> :NERDTree<cr>
-nnoremap <C-n> :NERDTreeToggle<cr>
-nnoremap <C-f> :NERDTreeFind<cr>
-let NERDTreeShowHidden=1
+nnoremap <leader>n :NvimTreeFocus<cr>
+nnoremap <C-n> :NvimTreeToggle<cr>
+nnoremap <C-f> :NvimTreeFindFile<cr>
+" let NERDTreeShowHidden=1
 
 " Window navigation
 nnoremap <C-J> <C-W><C-J>
