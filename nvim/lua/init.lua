@@ -160,21 +160,26 @@ require("indent_blankline").setup {
     show_current_context_start = true,
 }
 
-
+-- nvim tree shit
 -- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
-
 local function open_nvim_tree(data)
-    local real_file = vim.fn.filereadable(data.file) == 1
-    local no_name = data.file == "" and vim.bo[data.buf].buftype == ""
-    if real_file or no_name then
-       return
-    end
-   require("nvim-tree.api").tree.toggle({focus = false})
+      -- buffer is a directory
+  local directory = vim.fn.isdirectory(data.file) == 1
+
+  if not directory then
+    return
+  end
+
+  -- change to the directory
+  vim.cmd.cd(data.file)
+
+  -- open the tree
+  require("nvim-tree.api").tree.open({focus = false})
 end
 
 local tree_actions = {
@@ -254,7 +259,6 @@ end
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
 
--- OR setup with some options
 require("nvim-tree").setup({
     sort_by = "case_sensitive",
     renderer = {
@@ -269,3 +273,4 @@ require("nvim-tree").setup({
         }
     }
 })
+-- end of nvim tree 
