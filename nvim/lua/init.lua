@@ -66,6 +66,11 @@ require('lspconfig')['jsonls'].setup {
   },
 }
 
+require('lspconfig')["rust_analyzer"].setup{
+    capabilities = capabilities,
+    on_attach = on_attach
+}
+
 -- lua
 require('lspconfig')["lua_ls"].setup {
   settings = {
