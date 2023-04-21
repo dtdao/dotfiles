@@ -21,7 +21,127 @@ vim.diagnostic.config({
 --   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 -- end
 
-local on_attach = function()
+-- nvim tree custom stuff
+local tree_actions = {
+	{
+		name = "Create node",
+		handler = require("nvim-tree.api").fs.create,
+	},
+	{
+		name = "Remove node",
+		handler = require("nvim-tree.api").fs.remove,
+	},
+	{
+		name = "Trash node",
+		handler = require("nvim-tree.api").fs.trash,
+	},
+	{
+		name = "Rename node",
+		handler = require("nvim-tree.api").fs.rename,
+	},
+	{
+		name = "Fully rename node",
+		handler = require("nvim-tree.api").fs.rename_sub,
+	},
+	{
+		name = "Copy",
+		handler = require("nvim-tree.api").fs.copy.node,
+	},
+}
+local function tree_actions_menu(node)
+	local entry_maker = function(menu_item)
+		return {
+			value = menu_item,
+			ordinal = menu_item.name,
+			display = menu_item.name,
+		}
+	end
+
+	local finder = require("telescope.finders").new_table({
+		results = tree_actions,
+		entry_maker = entry_maker,
+	})
+
+	local sorter = require("telescope.sorters").get_generic_fuzzy_sorter()
+
+	local default_options = {
+		finder = finder,
+		sorter = sorter,
+		attach_mappings = function(prompt_buffer_number)
+			local actions = require("telescope.actions")
+
+			-- On item select
+			actions.select_default:replace(function()
+				local state = require("telescope.actions.state")
+				local selection = state.get_selected_entry()
+				-- Closing the picker
+				actions.close(prompt_buffer_number)
+				-- Executing the callback
+				selection.value.handler(node)
+			end)
+
+			-- The following actions are disabled in this example
+			-- You may want to map them too depending on your needs though
+			actions.add_selection:replace(function() end)
+			actions.remove_selection:replace(function() end)
+			actions.toggle_selection:replace(function() end)
+			actions.select_all:replace(function() end)
+			actions.drop_all:replace(function() end)
+			actions.toggle_all:replace(function() end)
+
+			return true
+		end,
+	}
+
+	-- Opening the menu
+	require("telescope.pickers").new({ prompt_title = "Tree menu" }, default_options):find()
+end
+local api = require("nvim-tree.api")
+
+local function edit_or_open()
+  local node = api.tree.get_node_under_cursor()
+
+  if node.nodes ~= nil then
+    -- expand or collapse folder
+    api.node.open.edit()
+  else
+    -- open file
+    api.node.open.edit()
+    -- Close the tree if file was opened
+    api.tree.close()
+  end
+end
+
+-- open as vsplit on current node
+local function vsplit_preview()
+  local node = api.tree.get_node_under_cursor()
+
+  if node.nodes ~= nil then
+    -- expand or collapse folder
+    api.node.open.edit()
+  else
+    -- open file as vsplit
+    api.node.open.vertical()
+  end
+
+  -- Finally refocus on tree if it was lost
+  api.tree.focus()
+end
+-- nvim-tree custom stuff end
+
+
+local on_attach = function(bufnr)
+
+  local function opts(desc)
+    return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
+
+        vim.keymap.set("n", "<Enter>", edit_or_open,          opts("Edit Or Open"))
+        vim.keymap.set("n", "I", vsplit_preview,        opts("Vsplit Preview"))
+        vim.keymap.set("n", "h", api.tree.close,        opts("Close"))
+        vim.keymap.set("n", "H", api.tree.collapse_all, opts("Collapse All"))
+        vim.keymap.set("n", "<C-Space>", tree_actions_menu, opts("Open custom menu"))
+
         vim.keymap.set("n", "K", vim.lsp.buf.hover, {buffer=0})
         vim.keymap.set("n", "gd", telescope_builtin.lsp_definitions, {buffer=0})
         vim.keymap.set("n", "gr", telescope_builtin.lsp_references, {buffer=0})
@@ -187,81 +307,6 @@ local function open_nvim_tree(data)
   require("nvim-tree.api").tree.open({focus = false})
 end
 
-local tree_actions = {
-	{
-		name = "Create node",
-		handler = require("nvim-tree.api").fs.create,
-	},
-	{
-		name = "Remove node",
-		handler = require("nvim-tree.api").fs.remove,
-	},
-	{
-		name = "Trash node",
-		handler = require("nvim-tree.api").fs.trash,
-	},
-	{
-		name = "Rename node",
-		handler = require("nvim-tree.api").fs.rename,
-	},
-	{
-		name = "Fully rename node",
-		handler = require("nvim-tree.api").fs.rename_sub,
-	},
-	{
-		name = "Copy",
-		handler = require("nvim-tree.api").fs.copy.node,
-	},
-}
-local function tree_actions_menu(node)
-	local entry_maker = function(menu_item)
-		return {
-			value = menu_item,
-			ordinal = menu_item.name,
-			display = menu_item.name,
-		}
-	end
-
-	local finder = require("telescope.finders").new_table({
-		results = tree_actions,
-		entry_maker = entry_maker,
-	})
-
-	local sorter = require("telescope.sorters").get_generic_fuzzy_sorter()
-
-	local default_options = {
-		finder = finder,
-		sorter = sorter,
-		attach_mappings = function(prompt_buffer_number)
-			local actions = require("telescope.actions")
-
-			-- On item select
-			actions.select_default:replace(function()
-				local state = require("telescope.actions.state")
-				local selection = state.get_selected_entry()
-				-- Closing the picker
-				actions.close(prompt_buffer_number)
-				-- Executing the callback
-				selection.value.handler(node)
-			end)
-
-			-- The following actions are disabled in this example
-			-- You may want to map them too depending on your needs though
-			actions.add_selection:replace(function() end)
-			actions.remove_selection:replace(function() end)
-			actions.toggle_selection:replace(function() end)
-			actions.select_all:replace(function() end)
-			actions.drop_all:replace(function() end)
-			actions.toggle_all:replace(function() end)
-
-			return true
-		end,
-	}
-
-	-- Opening the menu
-	require("telescope.pickers").new({ prompt_title = "Tree menu" }, default_options):find()
-end
-
 vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
 
 require("nvim-tree").setup({
@@ -269,13 +314,9 @@ require("nvim-tree").setup({
     renderer = {
     group_empty = true,
   },
+  on_attach = on_attach,
   view = {
       adaptive_size = true,
-        mappings = {
-            list = {
-              { key = "<C-Space>", action = "tree actions", action_cb = tree_actions_menu }
-            }
-        }
     }
 })
 -- end of nvim tree 
