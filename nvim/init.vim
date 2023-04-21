@@ -136,7 +136,7 @@ autocmd SourcePost * highlight Normal     ctermbg=NONE guibg=NONE
 " neoformat auto format
 augroup fmt
     autocmd!
-    autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll
+    " autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll
     autocmd BufWritePre * try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
 augroup End
 
