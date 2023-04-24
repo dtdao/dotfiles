@@ -1,4 +1,5 @@
 require("treesitter.treesitter")
+local nvmimTreeApi= require("nvim-tree.api")
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -96,51 +97,44 @@ local function tree_actions_menu(node)
 	-- Opening the menu
 	require("telescope.pickers").new({ prompt_title = "Tree menu" }, default_options):find()
 end
-local api = require("nvim-tree.api")
 
 local function edit_or_open()
-  local node = api.tree.get_node_under_cursor()
+  local node = nvmimTreeApi.tree.get_node_under_cursor()
 
   if node.nodes ~= nil then
     -- expand or collapse folder
-    api.node.open.edit()
+    nvmimTreeApi.node.open.edit()
   else
     -- open file
-    api.node.open.edit()
+    nvmimTreeApi.node.open.edit()
     -- Close the tree if file was opened
-    api.tree.close()
+    nvmimTreeApi.tree.close()
   end
 end
 
 -- open as vsplit on current node
 local function vsplit_preview()
-  local node = api.tree.get_node_under_cursor()
+  local node = nvmimTreeApi.tree.get_node_under_cursor()
 
   if node.nodes ~= nil then
     -- expand or collapse folder
-    api.node.open.edit()
+    nvmimTreeApi.node.open.edit()
   else
     -- open file as vsplit
-    api.node.open.vertical()
+    nvmimTreeApi.node.open.vertical()
   end
 
   -- Finally refocus on tree if it was lost
-  api.tree.focus()
+  nvmimTreeApi.tree.focus()
 end
 -- nvim-tree custom stuff end
 
 
 local on_attach = function(bufnr)
+        local function opts(desc)
+          return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+        end
 
-  local function opts(desc)
-    return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-  end
-
-        vim.keymap.set("n", "<Enter>", edit_or_open,          opts("Edit Or Open"))
-        vim.keymap.set("n", "I", vsplit_preview,        opts("Vsplit Preview"))
-        vim.keymap.set("n", "h", api.tree.close,        opts("Close"))
-        vim.keymap.set("n", "H", api.tree.collapse_all, opts("Collapse All"))
-        vim.keymap.set("n", "<C-Space>", tree_actions_menu, opts("Open custom menu"))
 
         vim.keymap.set("n", "K", vim.lsp.buf.hover, {buffer=0})
         vim.keymap.set("n", "gd", telescope_builtin.lsp_definitions, {buffer=0})
@@ -156,6 +150,12 @@ local on_attach = function(bufnr)
         vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, {buffer=0})
 
         vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float, {buffer=0})
+
+        vim.keymap.set("n", "<Enter>", edit_or_open,          opts("Edit Or Open"))
+        vim.keymap.set("n", "I", vsplit_preview,        opts("Vsplit Preview"))
+        vim.keymap.set("n", "h", nvmimTreeApi.tree.close,        opts("Close"))
+        vim.keymap.set("n", "H", nvmimTreeApi.tree.collapse_all, opts("Collapse All"))
+        vim.keymap.set("n", "<C-Space>", tree_actions_menu, opts("Open custom menu"))
 end
 
 -- Native LSP
@@ -172,7 +172,12 @@ require('lspconfig')['tsserver'].setup{
 -- eslint
 require('lspconfig')['eslint'].setup{
     capabilities = capabilities,
-    on_attach = on_attach
+    on_attach = function(_, bufnr)
+      vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      command = "EslintFixAll",
+    })  
+    end
 }
 
 -- lspconfig
