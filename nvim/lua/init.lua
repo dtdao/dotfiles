@@ -68,6 +68,11 @@ require('lspconfig')["rust_analyzer"].setup{
         "rustup", "run", "stable", "rust-analyzer",
     }
 }
+require("lualine").setup {
+    options = {
+        theme = "everforest"
+    }
+}
 
 -- lua
 require('lspconfig')["lua_ls"].setup {

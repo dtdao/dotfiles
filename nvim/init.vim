@@ -75,7 +75,7 @@ Plug 'tpope/vim-surround'
 Plug 'lukas-reineke/indent-blankline.nvim'
 
 " Status menu
-Plug 'vim-airline/vim-airline'
+Plug 'nvim-lualine/lualine.nvim'
 
 " Tree sitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
