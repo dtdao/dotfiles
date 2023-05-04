@@ -23,6 +23,8 @@ let mapleader = " "
 
 call plug#begin()
 
+Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
+
 " Styling
 Plug 'gruvbox-community/gruvbox'
 Plug 'luisiacc/gruvbox-baby', {'branch': 'main'}
@@ -90,8 +92,6 @@ call plug#end()
 " lua shit
 lua require("init")
 
-lua require('telescope').load_extension('fzf')
-
 " FZf position
 let g:fzf_layout = { 'down': '~40%' }
 
@@ -112,13 +112,6 @@ nnoremap <C-H> <C-W><C-H>
 " Vim panel resize
 nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
-
-" Telescope hot keys
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files({hidden = true})<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-nnoremap <leader>fr <cmd>lua require('telescope.builtin').resume()<cr>
 
 set background=dark
 colorscheme gruvbox

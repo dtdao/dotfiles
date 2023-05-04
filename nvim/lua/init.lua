@@ -1,10 +1,12 @@
 require("treesitter.treesitter")
 require("nvimTree.nvimTree")
+require("telescope.telescope")
+require("mason").setup()
+
+vim.g.mapleader = ' '
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-local telescope_builtin = require('telescope.builtin')
 
 vim.diagnostic.config({
     float = {
@@ -16,27 +18,13 @@ vim.diagnostic.config({
     }
 })
 
--- local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
--- for type, icon in pairs(signs) do
---   local hl = "DiagnosticSign" .. type
---   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
--- end
-
 
 local on_attach = function()
         vim.keymap.set("n", "K", vim.lsp.buf.hover, {buffer=0})
-        vim.keymap.set("n", "gd", telescope_builtin.lsp_definitions, {buffer=0})
-        vim.keymap.set("n", "gr", telescope_builtin.lsp_references, {buffer=0})
-        vim.keymap.set("n", "gi", telescope_builtin.lsp_type_definitions, {buffer=0})
-        vim.keymap.set("n", "gy", telescope_builtin.lsp_implementations, {buffer=0})
-
         vim.keymap.set("n", "<Leader>dj", vim.diagnostic.goto_next, {buffer=0})
         vim.keymap.set("n", "<Leader>dk", vim.diagnostic.goto_prev, {buffer=0})
-        vim.keymap.set("n", "<Leader>dl", telescope_builtin.diagnostics, {buffer=0})
         vim.keymap.set("n", "<Leader>r", vim.lsp.buf.rename, {buffer=0})
-
         vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, {buffer=0})
-
         vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float, {buffer=0})
 end
 
