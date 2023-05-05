@@ -2,6 +2,8 @@ require("treesitter.treesitter")
 require("nvimTree.nvimTree")
 require("telescope.telescope")
 require("mason").setup()
+require("chatGPT.chatGPT")
+
 require("nvim-autopairs").setup()
 
 vim.g.mapleader = ' '

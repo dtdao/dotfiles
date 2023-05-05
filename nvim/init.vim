@@ -45,6 +45,10 @@ Plug 'b0o/schemastore.nvim'
 " Signature
 Plug 'ray-x/lsp_signature.nvim'
 
+" Chat gpt
+Plug 'jackMort/ChatGPT.nvim'
+Plug 'MunifTanjim/nui.nvim'
+
 " Git
 Plug 'tpope/vim-fugitive'
 
