@@ -59,7 +59,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 "  autopairs
-Plug 'jiangmiao/auto-pairs'
+Plug 'windwp/nvim-autopairs'
 
 " comment plugin
 Plug 'tpope/vim-commentary'

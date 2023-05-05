@@ -2,6 +2,7 @@ require("treesitter.treesitter")
 require("nvimTree.nvimTree")
 require("telescope.telescope")
 require("mason").setup()
+require("nvim-autopairs").setup()
 
 vim.g.mapleader = ' '
 
@@ -32,7 +33,7 @@ end
 -- golang
 require('lspconfig')['gopls'].setup{
     capabilities = capabilities,
-    on_attach = on_attach
+    on_attach = on_attach,
 }
 -- TSconfig
 require('lspconfig')['tsserver'].setup{
