@@ -64,6 +64,7 @@ require('lspconfig')['jsonls'].setup {
   },
 }
 
+-- rust 
 require('lspconfig')["rust_analyzer"].setup{
     capabilities = capabilities,
     on_attach = on_attach,
@@ -71,13 +72,15 @@ require('lspconfig')["rust_analyzer"].setup{
         "rustup", "run", "stable", "rust-analyzer",
     }
 }
+
+-- lualine status bar
 require("lualine").setup {
     options = {
         theme = "everforest"
     }
 }
 
--- lua
+-- lua language server
 require('lspconfig')["lua_ls"].setup {
   settings = {
     Lua = {
@@ -105,6 +108,21 @@ require('lspconfig')["lua_ls"].setup {
 require("lsp_signature").setup{}
 require("luasnip.loaders.from_vscode").lazy_load()
 require("luasnip.loaders.from_lua").lazy_load()
+
+
+-- progress bar shit
+require("fidget").setup{
+  text = {
+    spinner = "moon",
+  },
+  align = {
+    bottom = true,
+  },
+  window = {
+    relative = "editor",
+    blend = 0,
+  },
+}
 
 vim.opt.completeopt={"menu", "menuone", "noselect"}
   -- Setup nvim-cmp.

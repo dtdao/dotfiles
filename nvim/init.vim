@@ -42,6 +42,10 @@ Plug 'rafamadriz/friendly-snippets'
 " Schemastore
 Plug 'b0o/schemastore.nvim'
 
+
+" progress bars shit
+Plug 'j-hui/fidget.nvim'
+
 " Signature
 Plug 'ray-x/lsp_signature.nvim'
 
