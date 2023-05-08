@@ -140,6 +140,12 @@ require("nvim-tree").setup({
     renderer = {
     group_empty = true,
   },
+  filters = {
+      dotfiles = false,
+  },
+  git = {
+      ignore = false,
+  },
   on_attach = on_attach,
   view = {
       adaptive_size = true,
