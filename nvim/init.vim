@@ -25,6 +25,8 @@ call plug#begin()
 
 Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
 
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
 " Styling
 Plug 'gruvbox-community/gruvbox'
 Plug 'luisiacc/gruvbox-baby', {'branch': 'main'}
