@@ -98,7 +98,7 @@ end
 -- open as vsplit on current node
 local function vsplit_preview()
     local action = "vsplit"
-    local node = nvmimTreeApi.tree.get_node_at_cursor()
+    local node = nvmimTreeApi.tree.get_node_under_cursor()
 
     if node == nil then
         return
