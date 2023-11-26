@@ -31,6 +31,14 @@ local on_attach = function()
         vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float, {buffer=0})
 end
 
+require'lspconfig'.sqlls.setup{
+    cmd = {"sql-language-server", "up", "--method", "stdio"},
+    filetypes = {"sql", "mysql"},
+    root_dir = function ()
+       return vim.loop.cwd() 
+    end
+}
+
 -- Native LSP
 -- golang
 require('lspconfig')['gopls'].setup{
@@ -104,25 +112,15 @@ require('lspconfig')["lua_ls"].setup {
   },
 }
 
+require("lspconfig")["yamlls"].setup{}
+
 -- lsp lsp_signature
 require("lsp_signature").setup{}
 require("luasnip.loaders.from_vscode").lazy_load()
 require("luasnip.loaders.from_lua").lazy_load()
 
-
 -- progress bar shit
-require("fidget").setup{
-  text = {
-    spinner = "moon",
-  },
-  align = {
-    bottom = true,
-  },
-  window = {
-    relative = "editor",
-    blend = 0,
-  },
-}
+require("fidget").setup{}
 
 vim.opt.completeopt={"menu", "menuone", "noselect"}
   -- Setup nvim-cmp.
@@ -180,6 +178,7 @@ vim.opt.completeopt={"menu", "menuone", "noselect"}
       { name = 'buffer' },
     })
   })
+
 
 vim.opt.list = true
 vim.opt.listchars:append "eol:↴"

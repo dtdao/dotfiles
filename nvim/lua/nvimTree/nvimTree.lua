@@ -1,4 +1,7 @@
 local nvmimTreeApi= require("nvim-tree.api")
+local lib = require("nvim-tree.lib")
+local view = require("nvim-tree.view")
+
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 -- nvim tree custom stuff
@@ -91,20 +94,30 @@ local function edit_or_open()
   end
 end
 
+
 -- open as vsplit on current node
 local function vsplit_preview()
-  local node = nvmimTreeApi.tree.get_node_under_cursor()
+    local action = "vsplit"
+    local node = nvmimTreeApi.tree.get_node_at_cursor()
 
-  if node.nodes ~= nil then
-    -- expand or collapse folder
-    nvmimTreeApi.node.open.edit()
-  else
-    -- open file as vsplit
-    nvmimTreeApi.node.open.vertical()
-  end
+    if node == nil then
+        return
+    end
 
-  -- Finally refocus on tree if it was lost
-  nvmimTreeApi.tree.focus()
+    -- Just copy what's done normally with vsplit
+    if node.link_to and not node.nodes then
+        require('nvim-tree.actions.node.open-file').fn(action, node.link_to)
+
+    elseif node.nodes ~= nil then
+        lib.expand_or_collapse(node)
+
+    else
+        require('nvim-tree.actions.node.open-file').fn(action, node.absolute_path)
+
+    end
+
+    -- Finally refocus on tree if it was lost
+    view.focus()
 end
 -- nvim-tree custom stuff end
 local on_attach = function(bufnr)
