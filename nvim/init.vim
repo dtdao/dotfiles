@@ -41,6 +41,12 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'L3MON4D3/LuaSnip' 
 Plug 'rafamadriz/friendly-snippets'
 
+" split join
+Plug 'AndrewRadev/splitjoin.vim'
+
+" Mark down
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
+
 " Schemastore
 Plug 'b0o/schemastore.nvim'
 
