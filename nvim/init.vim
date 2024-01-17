@@ -18,6 +18,8 @@ set scrolloff=8
 set cmdheight=2
 set tabstop=4
 
+set clipboard+=unnamedplus
+
 " leader key
 let mapleader = " "
 

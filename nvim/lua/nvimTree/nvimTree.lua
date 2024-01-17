@@ -124,6 +124,7 @@ local on_attach = function(bufnr)
         local function opts(desc)
           return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
         end
+        nvmimTreeApi.config.mappings.default_on_attach(bufnr)
         vim.keymap.set("n", "<Enter>", edit_or_open,          opts("Edit Or Open"))
         vim.keymap.set("n", "I", vsplit_preview,        opts("Vsplit Preview"))
         vim.keymap.set("n", "h", nvmimTreeApi.tree.close,        opts("Close"))
