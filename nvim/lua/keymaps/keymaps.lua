@@ -3,9 +3,13 @@ local nvmimTreeApi= require("nvim-tree.api")
 -- vim-fugitive
 vim.keymap.set("n" , "<Leader>gb",  '<CMD>Git blame<CR>', {})
 
+local toggleAndFind = function()
+    return nvmimTreeApi.tree.toggle({find_file = true, focus = true})
+end
+
 vim.keymap.set("n" , "<Leader>n",  nvmimTreeApi.tree.open, {})
 vim.keymap.set("n" , "<C-n>",  nvmimTreeApi.tree.toggle, {})
-vim.keymap.set("n" , "<C-f>", nvmimTreeApi.tree.find_file , {})
+vim.keymap.set("n" , "<C-f>", toggleAndFind, {})
 
 
 --  Window navigation
