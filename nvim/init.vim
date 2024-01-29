@@ -1,28 +1,3 @@
-set nocompatible
-syntax on
-filetype off
-
-set ignorecase
-set smartcase
-set incsearch
-set autoindent
-set relativenumber
-set noerrorbells
-set belloff=all
-set shiftwidth=4
-set expandtab
-set noswapfile
-set number
-set nohlsearch
-set scrolloff=8
-set cmdheight=2
-set tabstop=4
-
-set clipboard+=unnamedplus
-
-" leader key
-let mapleader = " "
-
 call plug#begin()
 
 Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
@@ -112,24 +87,6 @@ lua require("init")
 
 " FZf position
 let g:fzf_layout = { 'down': '~40%' }
-
-nnoremap <Leader>gb :Git blame<CR>
-
-" nerd tree keymaps
-nnoremap <leader>n :NvimTreeFocus<cr>
-nnoremap <C-n> :NvimTreeToggle<cr>
-nnoremap <C-f> :NvimTreeFindFile<cr>
-" let NERDTreeShowHidden=1
-
-" Window navigation
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-
-" Vim panel resize
-nnoremap <Leader>+ :vertical resize +5<CR>
-nnoremap <Leader>- :vertical resize -5<CR>
 
 set background=dark
 colorscheme gruvbox
