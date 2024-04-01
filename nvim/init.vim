@@ -80,6 +80,7 @@ Plug 'sbdchd/neoformat'
 " Test
 Plug 'vim-test/vim-test'
 
+Plug 'folke/trouble.nvim'
 call plug#end()
 
 " lua shit

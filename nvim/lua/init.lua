@@ -27,6 +27,7 @@ require("chatGPT.chatGPT")
 require("lsp.lsp")
 require("indentblankline.ibl")
 require("keymaps.keymaps")
+require('trouble.trouble')
 
 require("nvim-autopairs").setup()
 
