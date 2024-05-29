@@ -9,6 +9,7 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'luisiacc/gruvbox-baby', {'branch': 'main'}
 
 " Native lsp config
+Plug 'folke/neodev.nvim'
 Plug 'neovim/nvim-lspconfig' 
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp' 
@@ -78,7 +79,12 @@ Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'sbdchd/neoformat'
 
 " Test
-Plug 'vim-test/vim-test'
+" Plug 'vim-test/vim-test'
+Plug 'antoinemadec/FixCursorHold.nvim'
+Plug 'nvim-neotest/nvim-nio'
+Plug 'nvim-neotest/neotest'
+Plug 'nvim-neotest/neotest-jest'
+Plug 'olimorris/neotest-rspec'
 
 Plug 'folke/trouble.nvim'
 call plug#end()

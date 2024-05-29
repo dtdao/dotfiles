@@ -19,6 +19,10 @@ set.cmdheight = 2
 set.tabstop = 4
 set.clipboard = 'unnamedplus'
 
+require('neodev').setup({
+   library = { plugins = { "neotest" }, types = true },
+})
+
 require("treesitter.treesitter")
 require("nvimTree.nvimTree")
 require("telescope.telescope")
@@ -28,6 +32,7 @@ require("lsp.lsp")
 require("indentblankline.ibl")
 require("keymaps.keymaps")
 require('trouble.trouble')
+require('neotest.neotest')
 
 require("nvim-autopairs").setup()
 
