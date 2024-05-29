@@ -1,6 +1,8 @@
 call plug#begin()
 
 Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
+Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'neovim/nvim-lspconfig'
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
