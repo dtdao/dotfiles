@@ -1,7 +1,6 @@
-require('telescope').load_extension('fzf')
 local telescope_builtin = require('telescope.builtin')
 -- local actions = require('telescope.actions')
-local trouble = require('trouble.providers.telescope')
+local trouble = require('trouble.sources.telescope')
 
 vim.keymap.set("n", "gd", telescope_builtin.lsp_definitions, {})
 vim.keymap.set("n", "gr", telescope_builtin.lsp_references, {})
@@ -13,7 +12,7 @@ vim.keymap.set("n", "<Leader>fb", telescope_builtin.buffers,{})
 vim.keymap.set("n", "<Leader>fh",telescope_builtin.help_tags,{})
 vim.keymap.set("n", "<Leader>fr", telescope_builtin.resume, {})
 
-vim.keymap.set("i", "<c-t>", trouble.open_with_trouble, {})
+vim.keymap.set("i", "<c-t>", trouble.open, {})
 
 
 require("telescope").setup {
@@ -24,3 +23,4 @@ require("telescope").setup {
     }
 }
 
+require('telescope').load_extension('fzf')
