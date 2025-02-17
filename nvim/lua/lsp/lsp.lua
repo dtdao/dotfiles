@@ -30,7 +30,11 @@ require('lspconfig')['gopls'].setup{
     on_attach = on_attach,
 }
 -- TSconfig
-require('lspconfig')['tsserver'].setup{
+require('lspconfig')['ts_ls'].setup{
+    capabilities = capabilities,
+    on_attach = on_attach
+}
+
     capabilities = capabilities,
     on_attach = on_attach
 }
@@ -79,6 +83,7 @@ require("lualine").setup {
     }
 }
 
+
 -- lua language server
 require('lspconfig')["lua_ls"].setup {
   settings = {
@@ -99,6 +104,9 @@ require('lspconfig')["lua_ls"].setup {
       telemetry = {
         enable = false,
       },
+      completion = {
+          callSnippet = 'Replace'
+      }
     },
   },
 }
