@@ -1,0 +1,43 @@
+let mapleader=" "
+
+set relativenumber
+set scrolloff=10
+set linenumber
+set showmode
+set showcmd
+set visualbell
+set incsearch
+set clipboard+=unnamed
+set ignorecase
+set smartcase
+set hlsearch
+
+set nu
+set NERDTree
+set surround
+set nerdtree
+set which-key
+set easymotion
+set notimeout
+
+nnoremap <leader>e :action ShowErrorDescription<CR>
+nnoremap <Leader>fb :action RecentFiles<CR>
+
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-k> <C-w>k
+nnoremap <C-j> <C-w>j
+
+map <leader>v <Action>(MoveTabRight)
+
+map <leader>gc <action>(CommentByLineComment)
+
+" NERDTree stuff
+map <leader>x :NERDTreeToggle<CR>
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+
+" Git windows
+map <leader>gs <Action>(ActivateVersionControlToolWindow)
+map <leader>gb <Action>(Git.Branches)
+map <leader>ff <Action>(SearchEverywhere)
