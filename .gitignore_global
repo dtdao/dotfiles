@@ -1,3 +1,14 @@
 
 /config/credentials/test.key
 /config/credentials/test.yml.enc
+
+# doc for ruby YARD
+/doc/
+/.yardoc
+/doc/
+
+# IntelliJ
+.idea
+
+# ruby solargraph
+.solargraph.yml

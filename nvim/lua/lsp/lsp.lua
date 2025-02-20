@@ -2,6 +2,7 @@
 require("lsp_signature").setup{}
 require("luasnip.loaders.from_vscode").lazy_load()
 require("luasnip.loaders.from_lua").lazy_load()
+local util = require 'lspconfig.util'
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -35,6 +36,7 @@ require('lspconfig')['ts_ls'].setup{
     on_attach = on_attach
 }
 
+require('lspconfig')['sourcekit'].setup{
     capabilities = capabilities,
     on_attach = on_attach
 }
@@ -74,6 +76,22 @@ require('lspconfig')["rust_analyzer"].setup{
     cmd = {
         "rustup", "run", "stable", "rust-analyzer",
     }
+}
+
+-- -- ruby
+-- If using solargraph, MAKE SURE TO SET CONFIG FILE
+require'lspconfig'.solargraph.setup{
+    capabilities = capabilities,
+    on_attach = on_attach,
+    cmd = { 'solargraph', 'stdio' },
+    settings = {
+      solargraph = {
+        diagnostics = true,
+      },
+    },
+    init_options = { formatting = true },
+    filetypes = { 'ruby' },
+    root_dir = util.root_pattern('Gemfile', '.git'),
 }
 
 -- lualine status bar

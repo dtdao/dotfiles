@@ -91,6 +91,12 @@ Plug 'nvim-neotest/neotest-jest'
 Plug 'olimorris/neotest-rspec'
 
 Plug 'folke/trouble.nvim'
+
+" Ruby stuff
+Plug 'slim-template/vim-slim'
+Plug 'tpope/vim-rails'
+
+
 call plug#end()
 
 " lua shit
