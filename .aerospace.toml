@@ -256,3 +256,23 @@ run = 'layout floating'
 [[on-window-detected]]
 if.app-id = 'com.apple.mail'
 run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.iphonesimulator'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.usebruno.app'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.usebruno.app'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.spotify.client'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.openai.chat'
+run = 'layout floating'
