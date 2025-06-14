@@ -28,16 +28,14 @@ nnoremap <C-l> <C-w>l
 nnoremap <C-k> <C-w>k
 nnoremap <C-j> <C-w>j
 
-map <leader>v <Action>(MoveTabRight)
-
 map <leader>gc <action>(CommentByLineComment)
 
 " NERDTree stuff
 map <leader>x :NERDTreeToggle<CR>
-nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 
 " Git windows
 map <leader>gs <Action>(ActivateVersionControlToolWindow)
 map <leader>gb <Action>(Git.Branches)
 map <leader>ff <Action>(SearchEverywhere)
+map <leader>gu <Action>(FindUsages)
