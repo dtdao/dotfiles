@@ -30,11 +30,17 @@ require('lspconfig')['gopls'].setup{
     capabilities = capabilities,
     on_attach = on_attach,
 }
+
 -- TSconfig
-require('lspconfig')['ts_ls'].setup{
+vim.lsp.config('ts_ls', {
     capabilities = capabilities,
-    on_attach = on_attach
-}
+    on_attach = on_attach,
+    settings = {
+        inlayHint = inlayHints
+    }
+})
+
+vim.lsp.enable('ts_ls')
 
 require('lspconfig')['sourcekit'].setup{
     capabilities = capabilities,

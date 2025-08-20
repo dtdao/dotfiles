@@ -11,6 +11,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 " Styling
 Plug 'gruvbox-community/gruvbox'
 Plug 'luisiacc/gruvbox-baby', {'branch': 'main'}
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 
 " Native lsp config
 Plug 'folke/neodev.nvim'
@@ -113,6 +114,11 @@ syntax enable
 let g:gruvbox_contrast_dark='medium'
 let g:gruvbox_transparent_bg=1
 
+
+let $PATH = '~/.nvm/versions/node/v20.11.0/bin/neovim-node-host' . $PATH
+" let g:node_host_prog = expand('~/.nvm/versions/node/v20.11.0/bin/neovim-node-host')
+" let g:node_host_prog = '/usr/local/bin/neovim-node-host'
+
 " Workaround for creating transparent bg
 autocmd SourcePost * highlight Normal     ctermbg=NONE guibg=NONE
             \ |    highlight LineNr     ctermbg=NONE guibg=NONE
@@ -124,4 +130,5 @@ augroup fmt
     autocmd BufWritePre * try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
 augroup End
 
+filetype plugin indent on
 

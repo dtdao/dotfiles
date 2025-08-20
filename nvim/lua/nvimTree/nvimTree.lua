@@ -1,6 +1,6 @@
-local nvmimTreeApi= require("nvim-tree.api")
+local nvmimTreeApi = require("nvim-tree.api")
+local nvimTree = require("nvim-tree")
 local lib = require("nvim-tree.lib")
-local view = require("nvim-tree.view")
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -117,7 +117,7 @@ local function vsplit_preview()
     end
 
     -- Finally refocus on tree if it was lost
-    view.focus()
+    nvimTree.view.focus()
 end
 -- nvim-tree custom stuff end
 local on_attach = function(bufnr)
