@@ -8,6 +8,7 @@ Plug 'neovim/nvim-lspconfig'
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
+
 " Styling
 Plug 'gruvbox-community/gruvbox'
 Plug 'luisiacc/gruvbox-baby', {'branch': 'main'}
@@ -15,7 +16,6 @@ Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
 
 " Native lsp config
 Plug 'folke/neodev.nvim'
-Plug 'neovim/nvim-lspconfig' 
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp' 
 Plug 'hrsh7th/cmp-buffer' 
@@ -39,10 +39,6 @@ Plug 'j-hui/fidget.nvim'
 
 " Signature
 Plug 'ray-x/lsp_signature.nvim'
-
-" Chat gpt
-Plug 'jackMort/ChatGPT.nvim'
-Plug 'MunifTanjim/nui.nvim'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -115,9 +111,7 @@ let g:gruvbox_contrast_dark='medium'
 let g:gruvbox_transparent_bg=1
 
 
-let $PATH = '~/.nvm/versions/node/v20.11.0/bin/neovim-node-host' . $PATH
-" let g:node_host_prog = expand('~/.nvm/versions/node/v20.11.0/bin/neovim-node-host')
-" let g:node_host_prog = '/usr/local/bin/neovim-node-host'
+" node_host_prog handled in lua/init.lua
 
 " Workaround for creating transparent bg
 autocmd SourcePost * highlight Normal     ctermbg=NONE guibg=NONE
@@ -127,7 +121,7 @@ autocmd SourcePost * highlight Normal     ctermbg=NONE guibg=NONE
 " neoformat auto format
 augroup fmt
     autocmd!
-    autocmd BufWritePre * try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
+    autocmd BufWritePre * if &buftype == '' | silent! undojoin | silent! Neoformat | endif
 augroup End
 
 filetype plugin indent on

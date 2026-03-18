@@ -1,17 +1,24 @@
-require('treesitter-context').setup{
-    enable = true
-}
-vim.g.loaded_ts_context_commentstring = true
+require("treesitter-context").setup({
+  enable = true,
+})
 
-require'nvim-treesitter.configs'.setup {
+require("nvim-treesitter").setup({
     sync_install = true,
-    ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "typescript", "javascript", "go" },
+    ensure_installed = {
+     "c",
+     "lua",
+     "vim",
+     "vimdoc",
+     "query",
+     "typescript",
+     "javascript",
+     "go",
+    },
     highlight = { enable = true },
     auto_install = true,
-    incremental_selection = { enable = true },
-    textobjects = { enable = true },
-    context_commentstring = { enable = true}
-}
 
-require("ts_context_commentstring").setup{}
+    incremental_selection = { enable = true },
+})
+
+require("ts_context_commentstring").setup({})
 

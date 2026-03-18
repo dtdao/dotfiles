@@ -2,7 +2,6 @@ local set = vim.opt
 vim.g.mapleader = " "
 
 set.syntax = 'on'
-set.filetype = 'off'
 
 set.incsearch = true
 set.ignorecase = true

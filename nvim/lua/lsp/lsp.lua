@@ -2,140 +2,98 @@
 require("lsp_signature").setup{}
 require("luasnip.loaders.from_vscode").lazy_load()
 require("luasnip.loaders.from_lua").lazy_load()
-local util = require 'lspconfig.util'
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 vim.diagnostic.config({
-    float = {
-        max_width = 120
-    },
+    float = { max_width = 120 },
     virtual_text = {
         spacing = 20,
-        prefix = '▎'  -- '●' -- Could be '■', '▎', 'x'
+        prefix = '▎'
     }
 })
-local on_attach = function()
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, {buffer=0})
-        vim.keymap.set("n", "<Leader>dj", vim.diagnostic.goto_next, {buffer=0})
-        vim.keymap.set("n", "<Leader>dk", vim.diagnostic.goto_prev, {buffer=0})
-        vim.keymap.set("n", "<Leader>r", vim.lsp.buf.rename, {buffer=0})
-        vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, {buffer=0})
-        vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float, {buffer=0})
+
+local on_attach = function(_, bufnr)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, {buffer=bufnr})
+    vim.keymap.set("n", "<Leader>dj", vim.diagnostic.goto_next, {buffer=bufnr})
+    vim.keymap.set("n", "<Leader>dk", vim.diagnostic.goto_prev, {buffer=bufnr})
+    vim.keymap.set("n", "<Leader>r", vim.lsp.buf.rename, {buffer=bufnr})
+    vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, {buffer=bufnr})
+    vim.keymap.set("n", "<Leader>e", vim.diagnostic.open_float, {buffer=bufnr})
 end
--- Native LSP
--- golang
-require('lspconfig')['gopls'].setup{
-    capabilities = capabilities,
-    on_attach = on_attach,
-}
 
--- TSconfig
-vim.lsp.config('ts_ls', {
-    capabilities = capabilities,
-    on_attach = on_attach,
-    settings = {
-        inlayHint = inlayHints
-    }
-})
+vim.lsp.config('gopls', { capabilities = capabilities, on_attach = on_attach })
 
-vim.lsp.enable('ts_ls')
+vim.lsp.config('ts_ls', { capabilities = capabilities, on_attach = on_attach })
 
-require('lspconfig')['sourcekit'].setup{
-    capabilities = capabilities,
-    on_attach = on_attach
-}
+vim.lsp.config('sourcekit', { capabilities = capabilities, on_attach = on_attach })
 
--- markdown
-require'lspconfig'.marksman.setup{
-    capabilities = capabilities,
-    on_attach = on_attach
-}
+vim.lsp.config('marksman', { capabilities = capabilities, on_attach = on_attach })
 
--- eslint
-require('lspconfig')['eslint'].setup{
+vim.lsp.config('eslint', {
     capabilities = capabilities,
     on_attach = function(_, bufnr)
-      vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = bufnr,
-      command = "EslintFixAll",
-    })  
-    end
-}
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            command = "EslintFixAll",
+        })
+    end,
+})
 
--- lspconfig
-require('lspconfig')['jsonls'].setup {
-  capabilities = capabilities,
-  settings = {
-    json = {
-      schemas = require('schemastore').json.schemas(),
-      validate = { enable = true },
+vim.lsp.config('jsonls', {
+    capabilities = capabilities,
+    settings = {
+        json = {
+            schemas = require('schemastore').json.schemas(),
+            validate = { enable = true },
+        },
     },
-  },
-}
+})
 
--- rust 
-require('lspconfig')["rust_analyzer"].setup{
+vim.lsp.config('rust_analyzer', {
     capabilities = capabilities,
     on_attach = on_attach,
-    cmd = {
-        "rustup", "run", "stable", "rust-analyzer",
-    }
-}
+    cmd = { "rustup", "run", "stable", "rust-analyzer" },
+})
 
--- -- ruby
--- If using solargraph, MAKE SURE TO SET CONFIG FILE
-require'lspconfig'.solargraph.setup{
+-- ruby: MAKE SURE TO SET CONFIG FILE (.solargraph.yml)
+vim.lsp.config('solargraph', {
     capabilities = capabilities,
     on_attach = on_attach,
     cmd = { 'solargraph', 'stdio' },
-    settings = {
-      solargraph = {
-        diagnostics = true,
-      },
-    },
+    settings = { solargraph = { diagnostics = true } },
     init_options = { formatting = true },
     filetypes = { 'ruby' },
-    root_dir = util.root_pattern('Gemfile', '.git'),
-}
+    root_dir = function(fname)
+        return vim.fs.root(fname, { 'Gemfile', '.git' })
+    end,
+})
+
+vim.lsp.config('lua_ls', {
+    settings = {
+        Lua = {
+            runtime = { version = 'LuaJIT' },
+            diagnostics = { globals = { 'vim' } },
+            workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+            telemetry = { enable = false },
+            completion = { callSnippet = 'Replace' },
+        },
+    },
+})
+
+vim.lsp.config('yamlls', {})
+
+vim.lsp.enable({
+    'gopls', 'ts_ls', 'sourcekit', 'marksman',
+    'eslint', 'jsonls', 'rust_analyzer', 'solargraph',
+    'lua_ls', 'yamlls',
+})
 
 -- lualine status bar
 require("lualine").setup {
-    options = {
-        theme = "everforest"
-    }
+    options = { theme = "gruvbox" }
 }
-
-
--- lua language server
-require('lspconfig')["lua_ls"].setup {
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file("", true),
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
-      },
-      completion = {
-          callSnippet = 'Replace'
-      }
-    },
-  },
-}
-
-require("lspconfig")["yamlls"].setup{}
 
 vim.opt.completeopt={"menu", "menuone", "noselect"}
   -- Setup nvim-cmp.
